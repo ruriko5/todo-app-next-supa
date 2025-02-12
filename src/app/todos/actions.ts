@@ -50,3 +50,22 @@ export const getTodos = async () => {
 
   return data;
 };
+
+export const deleteTodo = async (id: number) => {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return redirect("/login");
+
+  const { error } = await supabase.from("todos").delete().match({
+    user_id: user.id,
+    id: id,
+  });
+
+  if (error) redirect("/error");
+
+  revalidatePath("/todos");
+};

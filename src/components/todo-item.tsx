@@ -7,6 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "./ui/button";
+import { deleteTodo } from "@/app/todos/actions";
+import { Trash2Icon } from "lucide-react";
 
 export const TodoItem = ({ todo }: { todo: Todo }) => {
   return (
@@ -19,7 +22,19 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
         <p className="overflow-hidden text-ellipsis">{todo.task}</p>
       </CardContent>
       <CardFooter>
-        <p>Card Footer</p>
+        <form>
+          <Button
+            formAction={async () => {
+              "use server";
+              await deleteTodo(todo.id);
+            }}
+            variant="ghost"
+            size="icon"
+          >
+            <Trash2Icon />
+            <span className="sr-only">Delete Todo</span>
+          </Button>
+        </form>
       </CardFooter>
     </Card>
   );
