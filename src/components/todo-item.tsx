@@ -10,6 +10,7 @@ import {
 import { Button } from "./ui/button";
 import { deleteTodo } from "@/app/todos/actions";
 import { Trash2Icon } from "lucide-react";
+import { EditDialog } from "./todo-edit-dialog";
 
 export const TodoItem = ({ todo }: { todo: Todo }) => {
   return (
@@ -22,6 +23,7 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
         <p className="overflow-hidden text-ellipsis">{todo.task}</p>
       </CardContent>
       <CardFooter>
+        <EditDialog todo={todo} />
         <form>
           <Button
             formAction={async () => {
