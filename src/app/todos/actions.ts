@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
+import { Todo } from "@/types/custom";
 
 export async function createTodo(formData: FormData) {
   const supabase = await createClient();
@@ -66,6 +67,25 @@ export const deleteTodo = async (id: number) => {
   });
 
   if (error) redirect("/error");
+
+  revalidatePath("/todos");
+};
+
+export const updateTodo = async (todo: Todo) => {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return redirect("/login");
+
+  const { error } = await supabase.from("todos").update(todo).match({
+    user_id: user.id,
+    id: todo.id,
+  });
+
+  if (error) return redirect("/error");
 
   revalidatePath("/todos");
 };
