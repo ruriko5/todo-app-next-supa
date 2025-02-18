@@ -1,4 +1,4 @@
-import { createTodo } from "@/app/todos/actions";
+import { createTodo } from "@/app/(todos)/actions";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
