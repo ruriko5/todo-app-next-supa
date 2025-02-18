@@ -1,4 +1,4 @@
-import { updateTodo } from "@/app/todos/actions";
+import { updateTodo } from "@/app/(todos)/actions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

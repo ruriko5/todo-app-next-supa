@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
-import { deleteTodo } from "@/app/todos/actions";
+import { deleteTodo } from "@/app/(todos)/actions";
 import { Trash2Icon } from "lucide-react";
 import { EditDialog } from "./todo-edit-dialog";
 
